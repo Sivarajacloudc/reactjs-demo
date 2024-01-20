@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     def tag = "build-${BUILD_NUMBER}"
-                    sh "./build.sh ${DOCKER_HUB_USERNAME} ${tag}"
+                    bat "build.bat %DOCKER_HUB_USERNAME% %tag%"
                 }
             }
         }
