@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: your-docker-hub-username/reactjs-demo:latest
+    ports:
+      - "8080:80"

@@ -1,0 +1,33 @@
+# Ignore development dependencies
+node_modules
+*.log
+*.log.*
+*.swp
+
+# Ignore build and temporary files
+/build
+/dist
+/yarn-error.log
+/.yarn
+/.pnp
+/pnp.js
+
+# Ignore Docker specific files
+.dockerignore
+.docker
+.dockerignore
+.docker-compose.yml
+
+# Ignore editor specific files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore tests
+__tests__
+test
+tests
