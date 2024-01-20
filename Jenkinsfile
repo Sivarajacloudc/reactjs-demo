@@ -39,6 +39,7 @@ pipeline {
             steps {
                 script {
                     def tag = "build-${BUILD_NUMBER}"
+                    sh "chmod +x ./build.sh"
                     sh "./build.sh ${DOCKER_HUB_USERNAME} ${tag}"
                 }
             }
@@ -79,7 +80,7 @@ pipeline {
                         
                         def tag = "build-${BUILD_NUMBER}"
                         // SSH into the server and execute deploy.sh
-                        sh "ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_IP} 'cd ${SERVER_DESTINATION} && ./deploy.sh ${DOCKER_HUB_USERNAME} ${DOCKER_HUB_PASSWORD} ${tag}'"
+                        sh "ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_IP} 'cd ${SERVER_DESTINATION} && chmod +x ./deploy.sh && ./deploy.sh ${DOCKER_HUB_USERNAME} ${DOCKER_HUB_PASSWORD} ${tag}'"
                     }
                 }
             }
