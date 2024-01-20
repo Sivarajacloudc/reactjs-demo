@@ -6,9 +6,9 @@ pipeline {
         GIT_REPO = 'https://github.com/Sivarajacloudc/reactjs-demo.git'
         DOCKER_HUB_REPO = 'sivarajacloudc/reactjs-demo'
         DOCKER_HUB_USERNAME='sivarajacloudc'
-        SERVER_USERNAME = 'your-server-username'
-        SERVER_IP = 'your-server-ip'
-        SERVER_DESTINATION = '/path/to/deploy'
+        SERVER_USERNAME = 'ubuntu'
+        SERVER_IP = '54.253.218.54'
+        SERVER_DESTINATION = '/home/ubuntu/reactjs-demo'
     }
 
     post {
@@ -71,7 +71,7 @@ pipeline {
         stage('Deploy to Server') {
             steps {
                 script {
-                    sshagent(['your-ssh-credentials-id']) {
+                    sshagent(['ec2-ssh-credentials-id']) {
                         // Copy deploy.sh to the server
                         sh "scp -o StrictHostKeyChecking=no deploy.sh ${SERVER_USERNAME}@${SERVER_IP}:${SERVER_DESTINATION}"
                         
@@ -80,7 +80,7 @@ pipeline {
                         
                         def tag = "build-${BUILD_NUMBER}"
                         // SSH into the server and execute deploy.sh
-                        sh "ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_IP} 'cd ${SERVER_DESTINATION} && chmod +x ./deploy.sh && ./deploy.sh ${DOCKER_HUB_USERNAME} ${DOCKER_HUB_PASSWORD} ${tag}'"
+                        sh "ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_IP} 'cd ${SERVER_DESTINATION} && chmod +x ./deploy.sh && sudo ./deploy.sh ${DOCKER_HUB_USERNAME} ${DOCKER_HUB_PASSWORD} ${tag}'"
                     }
                 }
             }
