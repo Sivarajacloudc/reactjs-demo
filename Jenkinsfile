@@ -3,8 +3,9 @@ pipeline {
 
     environment {
         // Define environment variables
-        GIT_REPO = 'https://github.com/rvsp/reactjs-demo'
-        DOCKER_HUB_REPO = 'your-docker-hub-username/reactjs-demo'
+        GIT_REPO = 'https://github.com/Sivarajacloudc/reactjs-demo.git'
+        DOCKER_HUB_REPO = 'sivarajacloudc/reactjs-demo'
+        DOCKER_HUB_USERNAME='sivarajacloudc'
         SERVER_USERNAME = 'your-server-username'
         SERVER_IP = 'your-server-ip'
         SERVER_DESTINATION = '/path/to/deploy'
@@ -14,13 +15,13 @@ pipeline {
         success {
             emailext subject: "Build Success: \${JOB_NAME} \${BUILD_NUMBER}",
                       body: "Build successful. Check it out at ${BUILD_URL}",
-                      to: 'your-email@example.com',
+                      to: 'sivarajacloudc@gmail.com',
                       mimeType: 'text/html'
             }
         failure {
             emailext subject: "Build Failure: \${JOB_NAME} \${BUILD_NUMBER}",
                       body: "Build failed. Check the console output at ${BUILD_URL}",
-                      to: 'your-email@example.com',
+                      to: 'sivarajacloudc@gmail.com',
                       mimeType: 'text/html'
         }
     }
