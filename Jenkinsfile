@@ -14,13 +14,13 @@ pipeline {
     post {
         success {
             emailext subject: "Build Success: \${JOB_NAME} \${BUILD_NUMBER}",
-                      body: "Build successful. Check it out at ${BUILD_URL}",
+                      body: "Build successful. Check it out at ${env.BUILD_URL}",
                       to: 'sivarajacloudc@gmail.com',
                       mimeType: 'text/html'
             }
         failure {
             emailext subject: "Build Failure: \${JOB_NAME} \${BUILD_NUMBER}",
-                      body: "Build failed. Check the console output at ${BUILD_URL}",
+                      body: "Build failed. Check the console output at ${env.BUILD_URL}",
                       to: 'sivarajacloudc@gmail.com',
                       mimeType: 'text/html'
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     def tag = "build-${BUILD_NUMBER}"
-                    bat "build.bat %DOCKER_HUB_USERNAME% %tag%"
+                    sh "./build.sh ${DOCKER_HUB_USERNAME} ${tag}"
                 }
             }
         }
